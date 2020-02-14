@@ -1,0 +1,17 @@
+{
+  "name": "todogql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "nodemon 'src/index.ts' --exec 'ts-node' src/server.ts -e ts,graphql"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  }
+}
