@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "nodemon 'src/index.ts' --exec 'ts-node' src/server.ts -e ts,graphql",
-    "build": "yarn start"
+    "build": "node 'src/index.ts' --exec 'ts-node' src/server.ts -e ts,graphql"
   },
   "keywords": [],
   "author": "",
