@@ -29,7 +29,7 @@ const resolvers = {
         .firestore()
         .collection('items')
         .get()
-      return items.docs.map(item => item.data())
+      return items.docs.map(item => ({ ...item.data(), id: item.id }))
     }
   },
   Mutation: {
