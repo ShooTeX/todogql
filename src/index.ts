@@ -19,6 +19,7 @@ const typeDefs = gql`
   }
   type Mutation {
     addItem(title: String!, checked: Boolean!): Item
+    deleteItem(id: String!): ID
   }
 `
 
@@ -40,6 +41,14 @@ const resolvers = {
         .doc()
         .set({ title: args.title, checked: args.checked })
       return ({ title: args.title, checked: args.checked })
+    },
+    async deleteItem (_: any, args: any) {
+      await admin
+        .firestore()
+        .collection('items')
+        .doc(args.id)
+        .delete()
+      return args.id
     }
   }
 }
