@@ -35,12 +35,13 @@ const resolvers = {
   },
   Mutation: {
     async addItem (_: any, args: any) {
+      let id: String = ''
       await admin
         .firestore()
         .collection('items')
-        .doc()
-        .set({ title: args.title, checked: args.checked })
-      return ({ title: args.title, checked: args.checked })
+        .add({ title: args.title, checked: args.checked })
+        .then(doc => { id = doc.id })
+      return ({ title: args.title, checked: args.checked, id })
     },
     async deleteItem (_: any, args: any) {
       await admin
