@@ -20,6 +20,7 @@ const typeDefs = gql`
   type Mutation {
     addItem(title: String!, checked: Boolean!): Item
     deleteItem(id: String!): ID
+    checkItem(id: String!, checked: Boolean!): Item
   }
 `
 
@@ -35,7 +36,7 @@ const resolvers = {
   },
   Mutation: {
     async addItem (_: any, args: any) {
-      let id: String = ''
+      let id = ''
       await admin
         .firestore()
         .collection('items')
@@ -50,6 +51,14 @@ const resolvers = {
         .doc(args.id)
         .delete()
       return args.id
+    },
+    async checkItem (_: any, args: any) {
+      await admin
+        .firestore()
+        .collection('items')
+        .doc(args.id)
+        .update({ checked: args.checked })
+      return ({ id: args.id, checked: args.checked })
     }
   }
 }
