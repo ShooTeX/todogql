@@ -1,12 +1,13 @@
 import { ApolloServer, gql, addErrorLoggingToSchema } from 'apollo-server'
 import admin from 'firebase-admin'
-import serviceAccountCredentials from './service-account.json'
 
-const serviceAccount = serviceAccountCredentials as admin.ServiceAccount
+const envCredentials = process.env.FIREBASE_SERVICE_ACCOUNT && JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-})
+(async () => {
+  admin.initializeApp({
+    credential: admin.credential.cert(envCredentials ?? await import('./service-account.json') as admin.ServiceAccount)
+  })
+})().catch(e => console.error(e))
 
 const typeDefs = gql`
   type Item {
