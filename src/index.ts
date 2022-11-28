@@ -1,8 +1,5 @@
 import { ApolloServer, gql, addErrorLoggingToSchema } from 'apollo-server'
 import admin from 'firebase-admin'
-import * as dotenv from 'dotenv'
-
-dotenv.config()
 
 const envCredentials = process.env.FIREBASE_SERVICE_ACCOUNT && JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
