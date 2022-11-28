@@ -1,13 +1,14 @@
 import { ApolloServer, gql, addErrorLoggingToSchema } from 'apollo-server'
 import admin from 'firebase-admin'
+import * as dotenv from 'dotenv'
 
-const envCredentials = process.env.FIREBASE_SERVICE_ACCOUNT && JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+dotenv.config()
 
-(async () => {
-  admin.initializeApp({
-    credential: admin.credential.cert(envCredentials)
-  })
-})().catch(e => console.error(e))
+const envCredentials = process.env.FIREBASE_SERVICE_ACCOUNT && JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
+
+admin.initializeApp({
+  credential: admin.credential.cert(envCredentials)
+})
 
 const typeDefs = gql`
   type Item {
