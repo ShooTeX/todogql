@@ -5,7 +5,7 @@ const envCredentials = process.env.FIREBASE_SERVICE_ACCOUNT && JSON.parse(proces
 
 (async () => {
   admin.initializeApp({
-    credential: admin.credential.cert(envCredentials ?? await import('./service-account.json') as admin.ServiceAccount)
+    credential: admin.credential.cert(envCredentials)
   })
 })().catch(e => console.error(e))
 
